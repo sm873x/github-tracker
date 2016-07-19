@@ -1,6 +1,6 @@
 (function(ns) {
     'use strict';
-    console.log('pageload');
+
     window.tracker = ns = (ns || {});
 
     window.addEventListener('hashchange', function() {
@@ -33,8 +33,8 @@
 
         //excecute function to initialize chosen module
 
-        if ( ns[viewBase.substr(1)] && ns[view.Base.substr(1)].load ) {
-            ns[view.Base.substr(1)].load( view );//substr will return everything after #
+        if ( ns[viewBase.substr(1)] && ns[viewBase.substr(1)].load ) {
+            ns[viewBase.substr(1)].load( view );//substr will return everything after #
         }
     };
 })(window.tracker);

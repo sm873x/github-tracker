@@ -17,8 +17,9 @@
 
         ns.authorize(token)
             .done(function(data) {
-                window.location.hash = '#myProfile';
+                window.location.hash = '#profile';
                 ns.userData = data;
+                console.log(ns.userData);
             })
             .fail( ns.error );
     });

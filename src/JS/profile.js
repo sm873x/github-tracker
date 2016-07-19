@@ -3,21 +3,29 @@
 
     window.tracker = ns = (ns || {});
 
-    ns.dispProfile = function displayProfile(data) {
-        console.log(data);
-        ns.$authArea.hide();
+    ns.profile = {};
+    ns.profile.load = function initProfile(view) {
+        console.log('hash', window.location.hash);
+
+        ns.dispProfile();
+
+        console.log('profile got');
+    };
+
+    ns.dispProfile = function dispProfile() {
 
         $('.userPage')
-            .text(data.login)
-            .attr('href', data.html_url);
+            .text(ns.userData.login)
+            .attr('href', ns.userData.html_url);
         $('.name')
-            .text('Name: ' + data.name);
+            .text('Name: ' + ns.userData.name);
         $('.repos')
-            .text('Repos: ' + data.public_repos);
+            .text('Repos: ' + ns.userData.public_repos);
         $('.followers')
-            .text('Followers: ' + data.followers);
+            .text('Followers: ' + ns.userData.followers);
         $('.acct-created')
-            .text('Account created: ' + data.created_at);
+            .text('Account created: ' + ns.userData.created_at);
+            
     };
 
 })(window.tracker);
