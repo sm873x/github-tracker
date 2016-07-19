@@ -3,6 +3,7 @@
 
     window.tracker = ns = (ns || {});
 
+    ns.$authArea = $('.auth-area');
     var $alertArea = $('.alert-area');
     var $logToken = $('.logToken');
 
@@ -24,11 +25,11 @@
      * @return {Promise} jQuery XHR Object containing promise method
      */
     ns.authorize = function loginAPI(token) {
-        if (!token) {
-            var def = $.Deferred();
-            def.reject('You must have a GitHub Personal Access Token to proceed');
-            return def.promise();
-        }
+        // if (!token) {
+        //     var def = $.Deferred();
+        //     def.reject('You must have a GitHub Personal Access Token to proceed');
+        //     return def.promise();
+        // }
 
         return $.ajax({
             url: 'https://api.github.com/user',
@@ -48,4 +49,5 @@
             $alertArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
     };
+
 })(window.tracker);
