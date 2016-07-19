@@ -4,6 +4,7 @@
     window.tracker = ns = (ns || {});
 
     $('.login').on('submit', function(e){
+        console.log('start');
         e.preventDefault();
 
         var token = $('#API-token').val();
