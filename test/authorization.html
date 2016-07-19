@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Authorization w/ Token</title>
+        <link rel='stylesheet' type='text/css' href='https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css'>
+    </head>
+    <body>
+        <div id='mocha'></id> <!-- mocha will place report here --->
+
+
+        <!-- libraries used - EITHER in testing our code -->
+        <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+        <script src='http://chaijs.com/chai.js'></script>
+
+        <!--tell mocha to use tdd vs bdd-->
+        <script>mocha.setup('tdd');</script>
+
+        <!-- our source code --->
+        <script src='/JS/authorization.js'></script>
+
+        <!-- our test code -->
+        <script src='specs/authorization.js'></script>
+
+        <script>mocha.run();</script>
+
+    </body>
+</html>
