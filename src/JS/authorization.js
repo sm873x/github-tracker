@@ -14,10 +14,8 @@
         console.log('token', token);
 
         ns.authorize(token)
-            .done(function(data) {
-                console.log('login', data);
-            })
-            .fail( ns.error(xhr) );
+            .done( ns.dispProfile )
+            .fail( ns.error );
     });
 
     /**
