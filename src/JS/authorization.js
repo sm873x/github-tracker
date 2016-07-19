@@ -4,6 +4,7 @@
     window.tracker = ns = (ns || {});
 
     ns.$authArea = $('.auth-area');
+    ns.userData = {};
     var $alertArea = $('.alert-area');
     var $logToken = $('.logToken');
 
@@ -15,7 +16,10 @@
         console.log('token', token);
 
         ns.authorize(token)
-            .done( ns.dispProfile )
+            .done(function(data) {
+                window.location.hash = '#myProfile';
+                ns.userData = data;
+            })
             .fail( ns.error );
     });
 

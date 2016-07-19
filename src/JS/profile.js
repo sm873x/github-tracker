@@ -18,6 +18,6 @@
             .text('Followers: ' + data.followers);
         $('.acct-created')
             .text('Account created: ' + data.created_at);
-    }
+    };
 
 })(window.tracker);
