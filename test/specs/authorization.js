@@ -7,7 +7,7 @@
 
         test('ensure function exists', function() {
             assert.ok( window.tracker.authorize, 'getRepoList exists' );
-            assert.strictEqual( typeof(window.gh.getRepoList), 'function', 'getRepoList exists' );
+            // assert.strictEqual( typeof(window.gh.getRepoList), 'function', 'getRepoList exists' );
         });
                                     //adding done in argument, means mocha will wait until callback done
         // test('getRepoList makes ajax call', function(doneCallback) {

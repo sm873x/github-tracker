@@ -18,7 +18,7 @@
 
     ns.authorize = function loginAPI(token) {
         return $.ajax({
-            url: 'https://api.github.com/user',
+            url: 'https://api.github.com/user/',
             method: 'get',
             headers: {
                 'Authorization': 'token ' + token

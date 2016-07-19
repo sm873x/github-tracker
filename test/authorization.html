@@ -10,14 +10,15 @@
 
 
         <!-- libraries used - EITHER in testing our code -->
-        <script src="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js"></script>
+        <script src='https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.js'></script>
         <script src='http://chaijs.com/chai.js'></script>
+        <script src='../src/JS/jquery-3.0.0.js'></script>
 
         <!--tell mocha to use tdd vs bdd-->
         <script>mocha.setup('tdd');</script>
 
         <!-- our source code --->
-        <script src='/JS/authorization.js'></script>
+        <script src='../src/JS/authorization.js'></script>
 
         <!-- our test code -->
         <script src='specs/authorization.js'></script>
