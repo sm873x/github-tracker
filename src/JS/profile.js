@@ -4,12 +4,10 @@
     window.tracker = ns = (ns || {});
 
     ns.profile = {};
-    ns.profile.load = function initProfile(view) {
+    ns.profile.load = function initProfile() {
         console.log('hash', window.location.hash);
 
         ns.dispProfile();
-
-        console.log('profile got');
     };
 
     ns.dispProfile = function dispProfile() {
@@ -25,7 +23,7 @@
             .text('Followers: ' + ns.userData.followers);
         $('.acct-created')
             .text('Account created: ' + ns.userData.created_at);
-            
+
     };
 
 })(window.tracker);

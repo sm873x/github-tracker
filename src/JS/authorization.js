@@ -12,14 +12,15 @@
         console.log('start');
         e.preventDefault();
 
-        var token = $('#API-token').val();
-        console.log('token', token);
+        ns.token = $('#API-token').val();
+        console.log('token', ns.token);
 
-        ns.authorize(token)
+        ns.authorize(ns.token)
             .done(function(data) {
-                window.location.hash = '#profile';
                 ns.userData = data;
                 console.log(ns.userData);
+
+                window.location.hash = '#profile';
             })
             .fail( ns.error );
     });
@@ -40,7 +41,7 @@
             url: 'https://api.github.com/user',
             method: 'get',
             headers: {
-                'Authorization': 'token ' + token
+                'Authorization': 'token ' + ns.token
             },
             dataType: 'json'
         });
