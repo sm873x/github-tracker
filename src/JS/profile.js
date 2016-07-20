@@ -7,22 +7,30 @@
     ns.profile.load = function initProfile() {
         console.log('hash', window.location.hash);
         ns.dispNav();
-        ns.dispProfile();
+        ns.dispProfile(ns.userData);
     };
 
-    ns.dispProfile = function dispProfile() {
+    ns.dispProfile = function dispProfile(data) {
+        //
+        // if (!data) {
+        //     $('#profile')
+        //         .append('<p class="no-data">Strange, no info in your GitHub account</p>');
+        //         .find('ul')
+        //             .hide();
+        //     return;
+        // }
 
         $('.userPage')
-            .text(ns.userData.login)
-            .attr('href', ns.userData.html_url);
+            .text(data.login)
+            .attr('href', data.html_url);
         $('.name')
-            .text('Name: ' + ns.userData.name);
+            .text('Name: ' + data.name);
         $('.repos')
-            .text('Repos: ' + ns.userData.public_repos);
+            .text('Repos: ' + data.public_repos);
         $('.followers')
-            .text('Followers: ' + ns.userData.followers);
+            .text('Followers: ' + data.followers);
         $('.acct-created')
-            .text('Account created: ' + ns.userData.created_at);
+            .text('Account created: ' + data.created_at);
 
     };
 
