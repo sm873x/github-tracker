@@ -1,0 +1,27 @@
+{
+  "name": "githubtracker",
+  "version": "1.0.0",
+  "description": "GitHub Tracker - Week 5 - Homework (for the week)",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sm873x/github-tracker.git"
+  },
+  "author": "Stella Ma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sm873x/github-tracker/issues"
+  },
+  "homepage": "https://github.com/sm873x/github-tracker#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jquery-mockjax": "^2.2.0",
+    "mocha": "^2.5.3"
+  }
+}
