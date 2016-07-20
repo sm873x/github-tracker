@@ -15,6 +15,12 @@
 
     ns.loadView = function loadView(view) {
         console.log('loadview');
+
+        if (!ns.token && view !== '#authorization') {
+            window.location.hash = '#authorization';
+            return;
+        }
+        
         $('.view').hide();
 
         var viewBase = view.split('/')[0];//find the view module we care about
