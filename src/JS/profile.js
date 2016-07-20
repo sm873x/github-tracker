@@ -6,7 +6,7 @@
     ns.profile = {};
     ns.profile.load = function initProfile() {
         console.log('hash', window.location.hash);
-
+        ns.dispNav();
         ns.dispProfile();
     };
 

@@ -16,11 +16,12 @@
     ns.loadView = function loadView(view) {
         console.log('loadview');
 
-        if (!ns.token && view !== '#authorization') {
+        if (!ns.token && view !== '#authorization' || view === '#logout') {
             window.location.hash = '#authorization';
+            $('.nav').hide();
             return;
         }
-        
+
         $('.view').hide();
 
         var viewBase = view.split('/')[0];//find the view module we care about
@@ -43,4 +44,12 @@
             ns[viewBase.substr(1)].load( view );//substr will return everything after #
         }
     };
+
+    ns.dispNav = function dispNav() {
+        if (window.location.hash !== '#authorization') {
+            $('.nav').show();
+        }
+        return;
+    }
+
 })(window.tracker);
