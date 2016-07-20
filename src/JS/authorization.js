@@ -41,7 +41,7 @@
             url: 'https://api.github.com/user',
             method: 'get',
             headers: {
-                'Authorization': 'token ' + ns.token
+                'Authorization': 'token ' + token
             },
             dataType: 'json'
         });
