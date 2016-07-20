@@ -31,11 +31,11 @@
      * @return {Promise} jQuery XHR Object containing promise method
      */
     ns.authorize = function loginAPI(token) {
-        // if (!token) {
-        //     var def = $.Deferred();
-        //     def.reject('You must have a GitHub Personal Access Token to proceed');
-        //     return def.promise();
-        // }
+        if (!token) {
+            var def = $.Deferred();
+            def.reject({message: 'no token given'});
+            return def.promise();
+        }
 
         return $.ajax({
             url: 'https://api.github.com/user',
