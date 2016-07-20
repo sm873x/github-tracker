@@ -3,6 +3,10 @@
 
     window.tracker = ns = (ns || {});
 
+    var authView = '#authorization';
+    var logoutView = '#logout';
+    ns.$nav = $('.nav');
+
     window.addEventListener('hashchange', function() {
         console.log('hash change');
         ns.loadView( window.location.hash );
@@ -10,15 +14,17 @@
 
     window.addEventListener( 'load', function() {
         console.log('load');
-        ns.loadView( window.location.hash || '#authorization');
+        ns.loadView( window.location.hash || authView );
     });
 
     ns.loadView = function loadView(view) {
         console.log('loadview');
 
-        if (!ns.token && view !== '#authorization' || view === '#logout') {
-            window.location.hash = '#authorization';
-            $('.nav').hide();
+        if (!ns.token && view !== authView) {
+            window.location.hash = authView;
+            return;
+        } else if (view === logoutView) {
+            ns.logout();
             return;
         }
 
@@ -50,6 +56,14 @@
             $('.nav').show();
         }
         return;
+    }
+
+
+    ns.logout = function logout() {
+        window.location.hash = authView;
+        ns.$nav.hide();
+        ns.token = '';
+        ns.$tokenInput.val('');
     }
 
 })(window.tracker);

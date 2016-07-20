@@ -7,6 +7,7 @@
     ns.userData = {};
     var $alertArea = $('.alert-area');
     var $logToken = $('.logToken');
+    ns.$tokenInput = $('#API-token');
 
     $logToken.on('submit', function(e){
         console.log('start');
