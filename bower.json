@@ -1,0 +1,21 @@
+{
+  "name": "githubtracker",
+  "description": "GitHub Tracker - Week 5 - Homework (for the week)",
+  "main": "index.js",
+  "authors": [
+    "Stella Ma"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sm873x/github-tracker",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/js/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0"
+  }
+}
