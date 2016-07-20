@@ -33,6 +33,9 @@
         var viewBase = view.split('/')[0];//find the view module we care about
         var $view = $( viewBase );
         //Remember: jquery object is array-like so you can get length
+        $('.nav [href="' + ns.lastView + '"]')
+            .parent()
+                .removeClass('active');
 
         $('.nav [href="' + viewBase + '"]')
             .parent()
@@ -43,7 +46,7 @@
         }
 
         $view.show();
-
+        ns.lastView = viewBase;
         //excecute function to initialize chosen module
 
         if ( ns[viewBase.substr(1)] && ns[viewBase.substr(1)].load ) {
