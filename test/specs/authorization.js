@@ -13,6 +13,16 @@
                 responseText: {name: 'Stella Ma', login: 'sm873x'}
             });
 
+            // $.mockjax({
+            //     url: 'https://api.github.com/user',
+            //     method: 'get',
+            //     status: '404',
+            //     responseText: {
+            //           'message': 'Requires authentication',
+            //           'documentation_url': 'https://developer.github.com/v3'
+            //     }
+            // });
+
         });
 
         teardown(function() {
@@ -34,7 +44,7 @@
                 assert.fail('authorize should not succeed w/o token' );
             })
             .fail(function(data) {
-                assert.strictEqual( data.message, 'no token given' );
+                assert.strictEqual( data.status, 400, 'no token given' );
             })
             .always(function() {
                 done();
@@ -62,6 +72,22 @@
             .always(function() {
                 done();
             });
+        });
+
+        test('fail works with unknown token', function(done) {
+            var returnVal = window.tracker.authorize();
+
+        returnVal
+            .done(function() {
+                assert.fail('invalid token should not result in success');
+            })
+            .fail(function(xhr) {
+                assert.strictEqual(xhr.status, 400);
+            })
+            .always(function() {
+                done();
+            })
+
         });
 
     });

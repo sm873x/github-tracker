@@ -34,7 +34,7 @@
     ns.authorize = function loginAPI(token) {
         if (!token) {
             var def = $.Deferred();
-            def.reject({message: 'no token given'});
+            def.reject({status: 400});
             return def.promise();
         }
 
