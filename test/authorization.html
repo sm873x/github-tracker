@@ -24,7 +24,12 @@
         <!-- our test code -->
         <script src='specs/authorization.js'></script>
 
-        <script>mocha.run();</script>
+        <script>
+        //detect if we're using PhantomJS
+            if (window.navigator.userAgent.indexOf('PhantomJS') < 0) {
+                mocha.run();
+            }
+        </script>
 
     </body>
 </html>

@@ -1,0 +1,174 @@
+(function(ns) {
+    'use strict';
+
+    window.tracker = ns = (ns || {});
+
+    var authView = '#authorization';
+    var logoutView = '#logout';
+    ns.$nav = $('.nav');
+
+    window.addEventListener('hashchange', function() {
+        console.log('hash change');
+        ns.loadView( window.location.hash );
+    });
+
+    window.addEventListener( 'load', function() {
+        console.log('load');
+        ns.loadView( window.location.hash || authView );
+    });
+
+    ns.loadView = function loadView(view) {
+        console.log('loadview');
+
+        if (!ns.token && view !== authView) {
+            window.location.hash = authView;
+            return;
+        } else if (view === logoutView) {
+            ns.logout();
+            return;
+        }
+
+        $('.view').hide();
+
+        var viewBase = view.split('/')[0];//find the view module we care about
+        var $view = $( viewBase );
+        //Remember: jquery object is array-like so you can get length
+        $('.nav [href="' + ns.lastView + '"]')
+            .parent()
+                .removeClass('active');
+
+        $('.nav [href="' + viewBase + '"]')
+            .parent()
+                .addClass('active');
+
+        if (!$view.length) {
+            $view = $('#authorization');
+        }
+
+        $view.show();
+        ns.lastView = viewBase;
+        //excecute function to initialize chosen module
+
+        if ( ns[viewBase.substr(1)] && ns[viewBase.substr(1)].load ) {
+            ns[viewBase.substr(1)].load( view );//substr will return everything after #
+        }
+    };
+
+    ns.dispNav = function dispNav() {
+        if (window.location.hash !== '#authorization') {
+            $('.nav').show();
+        }
+        return;
+    };
+
+    ns.logout = function logout() {
+        window.location.hash = authView;
+        ns.$nav.hide();
+        ns.token = '';
+        ns.$tokenInput.val('');
+    };
+
+})(window.tracker);
+
+(function(ns) {
+    'use strict';
+
+    window.tracker = ns = (ns || {});
+
+    ns.$authArea = $('.auth-area');
+    ns.userData = {};
+    var $alertArea = $('.alert-area');
+    var $logToken = $('.logToken');
+    ns.$tokenInput = $('#API-token');
+
+    $logToken.on('submit', function(e){
+        console.log('start');
+        e.preventDefault();
+
+        ns.token = $('#API-token').val();
+        console.log('token', ns.token);
+
+        ns.authorize(ns.token)
+            .done(function(data) {
+                ns.userData = data;
+                console.log(ns.userData);
+
+                window.location.hash = '#profile';
+            })
+            .fail( ns.error );
+    });
+
+    /**
+     * Use GitHub token to authorize retrieval of user info
+     * @param  {String} token Person Access Token
+     * @return {Promise} jQuery XHR Object containing promise method
+     */
+    ns.authorize = function loginAPI(token) {
+        if (!token) {
+            var def = $.Deferred();
+            def.reject({status: 400});
+            return def.promise();
+        }
+
+        return $.ajax({
+            url: 'https://api.github.com/user',
+            method: 'get',
+            headers: {
+                'Authorization': 'token ' + token
+            },
+            dataType: 'json'
+        });
+    };
+
+    ns.error = function handleAjaxFail(xhr) {
+        var statCode = xhr.status;
+        if ( 400 <= statCode && statCode < 500 ) {
+            $alertArea.text('Check your token');
+        } else if ( statCode >= 500){
+            $alertArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
+        }
+    };
+
+})(window.tracker);
+
+(function(ns) {
+    'use strict';
+
+    window.tracker = ns = (ns || {});
+
+    ns.profile = {};
+    ns.profile.load = function initProfile() {
+        console.log('hash', window.location.hash);
+        ns.dispNav();
+        ns.dispProfile(ns.userData);
+    };
+
+    ns.dispProfile = function dispProfile(data) {
+        //
+        // if (!data) {
+        //     $('#profile')
+        //         .append('<p class="no-data">Strange, no info in your GitHub account</p>');
+        //         .find('ul')
+        //             .hide();
+        //     return;
+        // }
+
+        $('.avatar')
+            .attr('src', data.avatar_url);
+        $('.userPage')
+            .text(data.login)
+            .attr('href', data.html_url);
+        $('.name')
+            .text('Name: ' + data.name);
+        $('.repos')
+            .text('Repos: ' + data.public_repos);
+        $('.followers')
+            .text('Followers: ' + data.followers + ' (following ' + data.following + ')');
+        $('.acct-created')
+            .text('Account created: ' + data.created_at);
+
+    };
+
+})(window.tracker);
+
+//# sourceMappingURL=main.js.map
