@@ -73,9 +73,22 @@ module.exports = function(grunt) {
 
                 }
             }
+        },
+
+        watch: {
+            sass: {
+                files: [ 'src/sass/**/*.scss' ],
+                tasks: [ 'sass' ],
+            },
+            js: {
+                files: [ 'src/js/**/*.js' ],
+                tasks: [ 'jshint', 'test', 'concat' ]
+            },
+            html: {
+                files: [ 'src/html/**/*.html' ],
+                tasks: [ 'copy:html' ]
+            }
         }
-
-
 
     });
 
@@ -88,10 +101,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     //setting up task aliases
-    grunt.registerTask('test', ['connect', 'mocha']);
-    grunt.registerTask('build', [ 'clean', 'jshint', 'concat', 'sass', 'copy'] );
+    grunt.registerTask('test', [ 'connect', 'mocha' ]);
+    grunt.registerTask('build', [ 'clean', 'jshint', 'concat', 'sass', 'copy']);
     grunt.registerTask('default', [ 'build' ]);
 };
