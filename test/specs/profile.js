@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var assert = chai.assert;
+    var assert = window.chai.assert;
 
     var fixtures = $('.fixtures').html();
 

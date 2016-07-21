@@ -21,7 +21,7 @@
         // }
 
         $('.avatar')
-            .attr('src', data.avatar_url)
+            .attr('src', data.avatar_url);
         $('.userPage')
             .text(data.login)
             .attr('href', data.html_url);

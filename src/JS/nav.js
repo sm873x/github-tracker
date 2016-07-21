@@ -59,13 +59,13 @@
             $('.nav').show();
         }
         return;
-    }
+    };
 
     ns.logout = function logout() {
         window.location.hash = authView;
         ns.$nav.hide();
         ns.token = '';
         ns.$tokenInput.val('');
-    }
+    };
 
 })(window.tracker);

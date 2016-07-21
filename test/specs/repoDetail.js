@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var assert = chai.assert;
+    var assert = window.chai.assert;
 
     suite('repoDetails view', function() {
 
@@ -28,7 +28,7 @@
 
             returnVal
                 .done(function(data) {
-                    assert.strictEqual($.mockjax.mockedAjaxCalls().length, 1)
+                    assert.strictEqual($.mockjax.mockedAjaxCalls().length, 1);
 
                     assert.isObject(data, 'repo data returned is object');
                     assert.isObject(data.owner, 'repo data has owner object');

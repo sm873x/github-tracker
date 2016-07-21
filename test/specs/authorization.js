@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var assert = chai.assert;
+    var assert = window.chai.assert;
 
     suite('get user information with token', function() {
 
@@ -86,7 +86,7 @@
             })
             .always(function() {
                 done();
-            })
+            });
 
         });
 

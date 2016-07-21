@@ -21,6 +21,9 @@
   "homepage": "https://github.com/sm873x/github-tracker#readme",
   "devDependencies": {
     "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
     "jquery-mockjax": "^2.2.0",
     "mocha": "^2.5.3"
   }
