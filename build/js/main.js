@@ -171,4 +171,21 @@
 
 })(window.tracker);
 
+(function(ns) {
+    'use strict';
+
+    window.tracker = ns = (ns || {});
+
+
+
+
+})(window.tracker);
+
+(function(ns) {
+    'use strict';
+
+    window.tracker = ns = (ns || {});
+
+})(window.tracker);
+
 //# sourceMappingURL=main.js.map
