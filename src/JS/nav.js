@@ -61,7 +61,6 @@
         return;
     }
 
-
     ns.logout = function logout() {
         window.location.hash = authView;
         ns.$nav.hide();

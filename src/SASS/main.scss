@@ -6,6 +6,11 @@
 //     display: none;
 // }
 
+main {
+    width: 425px;
+    margin: 30% auto;
+}
+
 .form-inline {
     width: 50%;
     display: inline;
@@ -13,4 +18,24 @@
 
 .nav {
     display: none;
+}
+
+.view {
+    border: 2px solid #8f8d91;
+}
+
+#profile {
+    padding-top: 10px;
+    padding-right: 40px;
+
+    ul {
+        list-style: none;
+        padding-bottom: 80px;
+        font-weight: bold;
+    }
+}
+.avatar {
+    float: right;
+    width: 67px;
+    border-radius: 10px;
 }

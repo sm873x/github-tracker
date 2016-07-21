@@ -12,74 +12,75 @@
         <link href='/css/styles.css' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <section class='info-area'>
-            <p class='alert-area'></p>
-        </section>
+        <main>
+            <section class='info-area'>
+                <p class='alert-area'></p>
+            </section>
 
-        <section class='auth-area view' id='authorization'>
-            <h1>GitHub Tracker</h1>
-            <p>Please log in with your GitHub API token:</p>
-            <form class='form-inline logToken' action='' method='post'>
-                <!-- <label for='API-token'>Use Token</label> -->
-                <input class='form-control' type='text' id='API-token' name='name' placeholder='GitHub API Token'>
-                <input class='btn btn-default' type='submit' value='Login'>
-            </form>
-        </section>
+            <section class='auth-area view' id='authorization'>
+                <h1>GitHub Tracker</h1>
+                <p>Please log in with your GitHub API token:</p>
+                <form class='form-inline logToken' action='' method='post'>
+                    <!-- <label for='API-token'>Use Token</label> -->
+                    <input class='form-control' type='text' id='API-token' name='name' placeholder='GitHub API Token'>
+                    <input class='btn btn-default' type='submit' value='Login'>
+                </form>
+            </section>
 
-        <nav>
-            <ul class='nav nav-tabs'>
-                <li> <a href='#profile'>Profile</a> </li>
-                <li> <a href='#repos'>Repos</a> </li>
-                <li> <a href='#repoDetail'>Repo Detail</a> </li>
-                <li> <a href='#logout'>Logout</a> </li>
-            </ul>
-        </nav>
-
-        <section id='profile' class='view'>
-            <h2>My Profile </h2>
-            <img class='avatar' alt='no pic'>
-            <ul>
-                <li class='username'>Username: <a class='userPage' href=''></a></li>
-                <li class='name'></li>
-                <li class='repos'></li>
-                <li class='followers'></li>
-                <li class='acct-created'>Account created</li>
-            </ul>
-        </section>
-
-        <section id='repos' class='view'>
-            <h2>Repositories</h2>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Stars</th>
-                    <th>Open Issues</th>
-                </tr>
-            <!-- TODO add table rows for each repo
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                <tr>
-            -->
-            </table>
-        </section>
-
-        <section id='repoDetail' class='view'>
-            <h2>Repo Details</h2>
-            <article class='repo-description'>
-                <h3 class='repo-name'>[Insert Repo Name]</h3>
-                <p class='repo-text'></p>
-                <a href='*'>[insert num] open issues</a>
-                <ul>
-                    <li class='owner'>Owner:</li>
-                    <li class='stars'>Stars:</li>
-                    <li class='forks'>Forks:</li>
-                    <li class='created-on'>Created on:</li>
+            <nav>
+                <ul class='nav nav-tabs'>
+                    <li> <a href='#profile'>Profile</a> </li>
+                    <li> <a href='#repos'>Repos</a> </li>
+                    <li> <a href='#repoDetail'>Repo Detail</a> </li>
+                    <li> <a href='#logout'>Logout</a> </li>
                 </ul>
-            </article>
-        </section>
+            </nav>
 
+            <section id='profile' class='view'>
+                <img class='avatar' alt='no pic'>
+                <ul>
+                    <li class='username'>Username: <a class='userPage' href=''></a></li>
+                    <li class='name'></li>
+                    <li class='repos'></li>
+                    <li class='followers'></li>
+                    <li class='acct-created'>Account created</li>
+                </ul>
+            </section>
+
+            <section id='repos' class='view'>
+                <h2>Repositories</h2>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Stars</th>
+                        <th>Open Issues</th>
+                    </tr>
+                <!-- TODO add table rows for each repo
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    <tr>
+                -->
+                </table>
+            </section>
+
+            <section id='repoDetail' class='view'>
+                <h2>Repo Details</h2>
+                <article class='repo-description'>
+                    <h3 class='repo-name'>[Insert Repo Name]</h3>
+                    <p class='repo-text'></p>
+                    <a href='*'>[insert num] open issues</a>
+                    <ul>
+                        <li class='owner'>Owner:</li>
+                        <li class='stars'>Stars:</li>
+                        <li class='forks'>Forks:</li>
+                        <li class='created-on'>Created on:</li>
+                    </ul>
+                </article>
+            </section>
+        </main>
+        
         <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
         <script>
             if (!window.jQuery) {
