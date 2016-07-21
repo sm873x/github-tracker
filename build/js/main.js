@@ -152,11 +152,12 @@
         //             .hide();
         //     return;
         // }
+        ns.username = data.login;
 
         $('.avatar')
             .attr('src', data.avatar_url);
         $('.userPage')
-            .text(data.login)
+            .text(ns.username)
             .attr('href', data.html_url);
         $('.name')
             .text('Name: ' + data.name);
@@ -176,7 +177,11 @@
 
     window.tracker = ns = (ns || {});
 
-
+    // ns.getRepo = function getRepo(u) {
+    //     $.ajax({
+    //         url: 'https://api.github.com/repos' + ns.username +
+    //     })
+    // }
 
 
 })(window.tracker);
@@ -185,6 +190,26 @@
     'use strict';
 
     window.tracker = ns = (ns || {});
+
+    $('a[href="#repos"]').on('click', function() {
+        getRepoList()
+        .done(function(data) {
+            console.log(data);
+        })
+        .fail( ns.error );
+    });
+
+    function getRepoList() {
+        return $.ajax({
+            url: 'https:api.github.com/user/repos',
+            get: 'get',
+            headers: {
+                'Authorization': 'token ' + ns.token
+            },
+            dataType: 'json'
+        });
+
+    }
 
 })(window.tracker);
 

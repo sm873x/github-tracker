@@ -19,11 +19,12 @@
         //             .hide();
         //     return;
         // }
+        ns.username = data.login;
 
         $('.avatar')
             .attr('src', data.avatar_url);
         $('.userPage')
-            .text(data.login)
+            .text(ns.username)
             .attr('href', data.html_url);
         $('.name')
             .text('Name: ' + data.name);
