@@ -20,6 +20,8 @@
         //     return;
         // }
 
+        $('.avatar')
+            .attr('src', data.avatar_url)
         $('.userPage')
             .text(data.login)
             .attr('href', data.html_url);
@@ -28,7 +30,7 @@
         $('.repos')
             .text('Repos: ' + data.public_repos);
         $('.followers')
-            .text('Followers: ' + data.followers);
+            .text('Followers: ' + data.followers + ' (following ' + data.following + ')');
         $('.acct-created')
             .text('Account created: ' + data.created_at);
 
