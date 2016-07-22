@@ -8,7 +8,7 @@
         <meta name='author' content=''>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
 
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel='stylesheet' type='text/css' integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet' type='text/css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'>
         <link href='/css/styles.css' rel='stylesheet' type='text/css'>
     </head>
     <body>
@@ -67,9 +67,13 @@
             <section id='repoDetail' class='view'>
                 <h2>Repo Details</h2>
                 <article class='repo-description'>
-                    <h3 class='repo-name'>[Insert Repo Name]</h3>
+                    <form class='form-inline inputRepo' action='' method='post'>
+                        <input class='form-control' type='text' id='Repo-name' name='name' placeholder='Enter a repo to get details'>
+                        <input class='btn btn-default' type='submit' value='Login'>
+                    </form>
+                    <a class='repo-name'>[Insert Repo Name]</a>
                     <p class='repo-text'></p>
-                    <a href='*'>[insert num] open issues</a>
+                    <a class='issues-url'><span class='open-issues'>#</span> open issues</a>
                     <ul>
                         <li class='owner'>Owner:</li>
                         <li class='stars'>Stars:</li>

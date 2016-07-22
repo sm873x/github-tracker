@@ -20,6 +20,7 @@
     $('#repos').on('click', '.toRepoDetail', function(e) {
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
+        $('.inputRepo').hide();
         ns.getRepo(ns.chosenRepo);
     });
 

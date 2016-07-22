@@ -20,6 +20,7 @@
     $('#repos').on('click', '.toRepoDetail', function(e) {
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
+        $('.inputRepo').hide();
         ns.getRepo(ns.chosenRepo);
     });
 
@@ -193,13 +194,22 @@
             },
             dataType: 'json'
         })
-        .done( dispRepoDetail )
+        .done( ns.dispRepoDetail )
         .fail( ns.error );
     };
 
-    function dispRepoDetail(data) {
+    ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
-    }
+
+        $('.repo-name')
+            .attr('href', data.html_url)
+            .text(data.name);
+        $('.repo-text').text(data.description);
+        $('.issues-url').attr('href', (data.html_url + '/issues') );
+        $('.open-issues').text(JSON.stringify(data.open_issues_count));
+
+
+    };
 
 })(window.tracker);
 
