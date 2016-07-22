@@ -16,9 +16,11 @@
         console.log('load');
         ns.loadView( window.location.hash || authView );
     });
-    
+
     $('#repos').on('click', '.toRepoDetail', function(e) {
-        window.location.hash = '#repoDetail/' + e.target.innerText;
+        ns.chosenRepo = e.target.innerText;
+        window.location.hash = '#repoDetail/' + ns.chosenRepo;
+        ns.getRepo(ns.chosenRepo);
     });
 
     ns.loadView = function loadView(view) {
@@ -181,12 +183,23 @@
 
     window.tracker = ns = (ns || {});
 
-    // ns.getRepo = function getRepo(u) {
-    //     $.ajax({
-    //         url: 'https://api.github.com/repos' + ns.username +
-    //     })
-    // }
 
+    ns.getRepo = function getRepo(repoName) {
+        $.ajax({
+            url: 'https://api.github.com/repos/' + ns.username + '/' + repoName,
+            get: 'get',
+            headers: {
+                'Authorization': 'token ' + ns.token
+            },
+            dataType: 'json'
+        })
+        .done( dispRepoDetail )
+        .fail( ns.error );
+    };
+
+    function dispRepoDetail(data) {
+        console.log(data);
+    }
 
 })(window.tracker);
 
@@ -195,19 +208,16 @@
 
     window.tracker = ns = (ns || {});
 
-
     $('a[href="#repos"]').on('click', function() {
         if (!ns.repoDataArr) {
             getRepoList()
                 .done(function(data) {
                     ns.repoDataArr = data;
-                    console.log(ns.repoDataArr);
 
                     ns.repoDataArr.forEach( ns.dispRepoList );
                 })
                 .fail( ns.error );
         }
-
     });
 
     function getRepoList() {

@@ -16,9 +16,11 @@
         console.log('load');
         ns.loadView( window.location.hash || authView );
     });
-    
+
     $('#repos').on('click', '.toRepoDetail', function(e) {
-        window.location.hash = '#repoDetail/' + e.target.innerText;
+        ns.chosenRepo = e.target.innerText;
+        window.location.hash = '#repoDetail/' + ns.chosenRepo;
+        ns.getRepo(ns.chosenRepo);
     });
 
     ns.loadView = function loadView(view) {

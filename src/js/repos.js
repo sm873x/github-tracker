@@ -3,19 +3,16 @@
 
     window.tracker = ns = (ns || {});
 
-
     $('a[href="#repos"]').on('click', function() {
         if (!ns.repoDataArr) {
             getRepoList()
                 .done(function(data) {
                     ns.repoDataArr = data;
-                    console.log(ns.repoDataArr);
 
                     ns.repoDataArr.forEach( ns.dispRepoList );
                 })
                 .fail( ns.error );
         }
-
     });
 
     function getRepoList() {
