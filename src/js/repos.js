@@ -29,28 +29,19 @@
 
     ns.dispRepoList = function dispRepoList(repo) {
         ns.repoName = repo.name;
-        ns.repoURL = repo.url;
-        //
-        // getRepoStars(repo)
-        //     .done(function dispStars(data) {
-        //         console.log('star data', data);
-        //     })
-        //     .fail(ns.error);
+        console.log( 'repo name', ns.repoName );
+        // ns.repoURL = repo.svn_url;
 
         $('.repoTable')
             .append('<tr class=' + ns.repoName + '> \
-                        <td>' + ns.repoName + '</td> \
+                        <td class="toRepoDetail">' + ns.repoName + '</td> \
                         <td>' + repo.stargazers_count + '</td> \
                         <td>' + repo.open_issues_count + '</td> \
                     </tr>');
     };
-    //
-    // function getRepoStars() {
-    //     return $.ajax({
-    //         url: ns.repoURL + '/starred/' + ns.username + ns.repoName,
-    //         method: 'get',
-    //         dataType: 'json'
-    //     });
-    // }
+
+    $('#repos').on('click', '.toRepoDetail', function(e) {
+        window.location.hash = '#repoDetail/' + e.target.innerText;
+    });
 
 })(window.tracker);

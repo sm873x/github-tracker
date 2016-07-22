@@ -16,6 +16,10 @@
         console.log('load');
         ns.loadView( window.location.hash || authView );
     });
+    
+    $('#repos').on('click', '.toRepoDetail', function(e) {
+        window.location.hash = '#repoDetail/' + e.target.innerText;
+    });
 
     ns.loadView = function loadView(view) {
         console.log('loadview');
