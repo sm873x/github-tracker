@@ -24,10 +24,16 @@
             .attr('href', data.html_url)
             .text(data.name);
         $('.repo-text').text(data.description);
-        $('.issues-url').attr('href', (data.html_url + '/issues') );
-        $('.open-issues').text(JSON.stringify(data.open_issues_count));
-
-
+        dispIssue(data);
     };
 
+    function dispIssue(data) {
+        if (data.has_issues !== true) {
+            $('.issues-url')
+                .replaceWith('<p>This repo does not contain issues</p>');
+        }
+        
+        $('.issues-url').attr('href', (data.html_url + '/issues') );
+        $('.open-issues').text(JSON.stringify(data.open_issues_count));
+    }
 })(window.tracker);
