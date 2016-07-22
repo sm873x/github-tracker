@@ -5,15 +5,17 @@
 
 
     $('a[href="#repos"]').on('click', function() {
+        if (!ns.repoDataArr) {
+            getRepoList()
+                .done(function(data) {
+                    ns.repoDataArr = data;
+                    console.log(ns.repoDataArr);
 
-        getRepoList()
-            .done(function(data) {
-                ns.repoDataArr = data;
-                console.log(ns.repoDataArr);
+                    ns.repoDataArr.forEach( ns.dispRepoList );
+                })
+                .fail( ns.error );
+        }
 
-                ns.repoDataArr.forEach( ns.dispRepoList );
-            })
-            .fail( ns.error );
     });
 
     function getRepoList() {
@@ -39,9 +41,5 @@
                         <td>' + repo.open_issues_count + '</td> \
                     </tr>');
     };
-
-    $('#repos').on('click', '.toRepoDetail', function(e) {
-        window.location.hash = '#repoDetail/' + e.target.innerText;
-    });
 
 })(window.tracker);
