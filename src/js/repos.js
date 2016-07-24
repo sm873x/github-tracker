@@ -5,7 +5,7 @@
 
     $('a[href="#repos"]').on('click', function() {
         if (!ns.repoDataArr) {
-            getRepoList()
+            ns.getRepoList()
                 .done(function(data) {
                     ns.repoDataArr = data;
 
@@ -15,7 +15,7 @@
         }
     });
 
-    function getRepoList() {
+    ns.getRepoList = function getRepoList() {
         return $.ajax({
             url: 'https:api.github.com/user/repos',
             get: 'get',
@@ -24,7 +24,7 @@
             },
             dataType: 'json'
         });
-    }
+    };
 
     ns.dispRepoList = function dispRepoList(repo) {
         ns.repoName = repo.name;

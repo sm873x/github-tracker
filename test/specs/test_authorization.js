@@ -13,16 +13,6 @@
                 responseText: {name: 'Stella Ma', login: 'sm873x'}
             });
 
-            // $.mockjax({
-            //     url: 'https://api.github.com/user',
-            //     method: 'get',
-            //     status: '404',
-            //     responseText: {
-            //           'message': 'Requires authentication',
-            //           'documentation_url': 'https://developer.github.com/v3'
-            //     }
-            // });
-
         });
 
         teardown(function() {
@@ -87,11 +77,8 @@
             .always(function() {
                 done();
             });
-
         });
 
     });
-
-
 
 })();
