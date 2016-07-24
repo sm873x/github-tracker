@@ -35,6 +35,10 @@
 
     ns.loadView = function loadView(view) {
         console.log('loadview');
+        var viewBase = view.split('/')[0];
+        var $viewBase = $( viewBase );
+
+        $('.view').hide();
 
         if (!ns.token && view !== authView) {
             window.location.hash = authView;
@@ -44,11 +48,6 @@
             return;
         }
 
-        $('.view').hide();
-
-        var viewBase = view.split('/')[0];
-        var $view = $( viewBase );
-
         $('.nav [href="' + ns.lastView + '"]')
             .parent()
                 .removeClass('active');
@@ -57,11 +56,11 @@
             .parent()
                 .addClass('active');
 
-        if (!$view.length) {
-            $view = $('#authorization');
+        if (!$viewBase.length) {
+            $viewBase = $(authView);
         }
 
-        $view.show();
+        $viewBase.show();
 
         ns.lastView = viewBase;
 
@@ -71,8 +70,8 @@
     };
 
     ns.dispNav = function dispNav() {
-        if (window.location.hash !== '#authorization') {
-            $('.nav').show();
+        if (window.location.hash !== authView) {
+            ns.$nav.show();
         }
         return;
     };
