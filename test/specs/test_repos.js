@@ -5,7 +5,7 @@
 
     var fixtures = $('.fixtures').html();
 
-    suite('get and display repos in table', function() {
+    suite('get repos in table', function() {
         setup(function() {
             $('.fixtures').html(fixtures);
 
@@ -45,6 +45,12 @@
                     done();
                 });
         });
+    });
+
+    suite('display repos in table', function() {
+        setup(function() {
+            $('.fixtures').html(fixtures);
+        });
 
         test('ensure display repos function exists', function() {
             assert.ok( window.tracker.dispRepoList, 'dispRepoList exists');
@@ -57,4 +63,5 @@
             assert.strictEqual(repo.name, 'example', 'data values work');
         });
     });
+
 })();
