@@ -7,8 +7,8 @@
     var authView = '#authorization';
     var logoutView = '#logout';
     var reposView = '#repos';
-    var $details = $('.details');
-    var $inputRepo = $('.inputRepo');
+    ns.$details = $('.details');
+    ns.$repoForm = $('.inputRepo');
 
     window.addEventListener('hashchange', function() {
         console.log('hash change');
@@ -23,16 +23,16 @@
     reposView.on('click', '.toRepoDetail', function(e) {
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
-        $inputRepo.hide();
-        $details.show();
+        ns.$repoForm.hide();
+        ns.$details.show();
         ns.getRepo(ns.chosenRepo);
     });
 
     $('.inpRepo').on('click', function() {
         console.log('repoName', ns.repoName);
         if (!ns.repoName) {
-            $details.hide();
-            $inputRepo.show();
+            ns.$details.hide();
+            ns.$repoForm.show();
         }
     });
 
@@ -191,7 +191,6 @@
 
     window.tracker = ns = (ns || {});
 
-    ns.$repoForm = $('.inputRepo');
     ns.$theRepoName = $('.repo-name');
     ns.$repoIssUrl = $('.issues-url');
 
@@ -218,8 +217,8 @@
 
     ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
-        $('.details').show();
-        $('.inputRepo').hide();
+        ns.$details.show();
+        ns.$repoForm.hide();
 
         dispIssue(data);
 

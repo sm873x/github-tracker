@@ -3,7 +3,6 @@
 
     window.tracker = ns = (ns || {});
 
-    ns.$repoForm = $('.inputRepo');
     ns.$theRepoName = $('.repo-name');
     ns.$repoIssUrl = $('.issues-url');
 
@@ -30,8 +29,8 @@
 
     ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
-        $('.details').show();
-        $('.inputRepo').hide();
+        ns.$details.show();
+        ns.$repoForm.hide();
 
         dispIssue(data);
 
