@@ -5,7 +5,7 @@
 
     ns.$authArea = $('.auth-area');
     ns.userData = {};
-    var $alertArea = $('.alert-area');
+    ns.$alertArea = $('.alert-area');
     var $logToken = $('.logToken');
     ns.$tokenInput = $('#API-token');
 
@@ -46,15 +46,6 @@
             },
             dataType: 'json'
         });
-    };
-
-    ns.error = function handleAjaxFail(xhr) {
-        var statCode = xhr.status;
-        if ( 400 <= statCode && statCode < 500 ) {
-            $alertArea.text('Check your token');
-        } else if ( statCode >= 500){
-            $alertArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
-        }
     };
 
 })(window.tracker);

@@ -28,9 +28,4 @@
             .text('Account created: ' + ns.date(data.created_at) );
     };
 
-    ns.date = function justDate(dateTime){
-        var dateArr = dateTime.split('T');
-        return dateArr[0];
-    };
-
 })(window.tracker);

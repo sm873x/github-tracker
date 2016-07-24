@@ -6,7 +6,7 @@
     ns.$nav = $('.nav');
     var authView = '#authorization';
     var logoutView = '#logout';
-    var reposView = '#repos';
+    var $reposView = $('#repos');
     ns.$details = $('.details');
     ns.$repoForm = $('.inputRepo');
 
@@ -20,7 +20,7 @@
         ns.loadView( window.location.hash || authView );
     });
 
-    reposView.on('click', '.toRepoDetail', function(e) {
+    $reposView.on('click', '.toRepoDetail', function(e) {
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
         ns.$repoForm.hide();
@@ -95,7 +95,7 @@
 
     ns.$authArea = $('.auth-area');
     ns.userData = {};
-    var $alertArea = $('.alert-area');
+    ns.$alertArea = $('.alert-area');
     var $logToken = $('.logToken');
     ns.$tokenInput = $('#API-token');
 
@@ -138,13 +138,26 @@
         });
     };
 
+})(window.tracker);
+
+(function(ns) {
+    'use strict';
+
+    window.tracker = ns = ( ns || {} );
+
+
     ns.error = function handleAjaxFail(xhr) {
         var statCode = xhr.status;
         if ( 400 <= statCode && statCode < 500 ) {
-            $alertArea.text('Check your token');
+            ns.$alertArea.text('Check your token');
         } else if ( statCode >= 500){
-            $alertArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
+            ns.$alertArea.text('Ruh roh, looks like we\'re having problems. Check back later please');
         }
+    };
+
+    ns.date = function justDate(dateTime){
+        var dateArr = dateTime.split('T');
+        return dateArr[0];
     };
 
 })(window.tracker);
@@ -177,11 +190,6 @@
             .text('Followers: ' + data.followers + ' (following ' + data.following + ')');
         $('.acct-created')
             .text('Account created: ' + ns.date(data.created_at) );
-    };
-
-    ns.date = function justDate(dateTime){
-        var dateArr = dateTime.split('T');
-        return dateArr[0];
     };
 
 })(window.tracker);

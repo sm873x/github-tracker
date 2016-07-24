@@ -6,7 +6,7 @@
     ns.$nav = $('.nav');
     var authView = '#authorization';
     var logoutView = '#logout';
-    var reposView = '#repos';
+    var $reposView = $('#repos');
     ns.$details = $('.details');
     ns.$repoForm = $('.inputRepo');
 
@@ -20,7 +20,7 @@
         ns.loadView( window.location.hash || authView );
     });
 
-    reposView.on('click', '.toRepoDetail', function(e) {
+    $reposView.on('click', '.toRepoDetail', function(e) {
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
         ns.$repoForm.hide();
