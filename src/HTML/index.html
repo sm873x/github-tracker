@@ -31,7 +31,7 @@
                 <ul class='nav nav-tabs'>
                     <li> <a href='#profile'>Profile</a> </li>
                     <li> <a href='#repos'>Repos</a> </li>
-                    <li> <a href='#repoDetail'>Repo Detail</a> </li>
+                    <li> <a href='#repoDetail' class='inpRepo'>Repo Detail</a> </li>
                     <li class='logout'> <a href='#logout'>Logout</a> </li>
                 </ul>
             </nav>
@@ -65,20 +65,19 @@
             </section>
 
             <section id='repoDetail' class='view'>
-                <h2>Repo Details</h2>
                 <article class='repo-description'>
                     <form class='form-inline inputRepo' action='' method='post'>
                         <input class='form-control' type='text' id='Repo-name' name='name' placeholder='Enter a repo to get details'>
-                        <input class='btn btn-default' type='submit' value='Login'>
+                        <input class='btn btn-default' type='submit' value='get repo'>
                     </form>
-                    <a class='repo-name'>[Insert Repo Name]</a>
-                    <p class='repo-text'></p>
-                    <a class='issues-url'><span class='open-issues'>#</span> open issues</a>
-                    <ul>
-                        <li class='owner'>Owner:</li>
-                        <li class='stars'>Stars:</li>
-                        <li class='forks'>Forks:</li>
-                        <li class='created-on'>Created on:</li>
+                    <a class='repo-name details'></a>
+                    <p class='repo-text details'></p>
+                    <a class='issues-url details'><span class='open-issues'>#</span> open issues</a>
+                    <ul class='details'>
+                        <li>Owner: <span class='owner'></span></li>
+                        <li>Stars: <span class='stars'></span></li>
+                        <li>Forks: <span class='forks'></span></li>
+                        <li>Created on: <span  class='created-on'></span></li>
                     </ul>
                 </article>
             </section>

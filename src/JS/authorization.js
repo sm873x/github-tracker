@@ -13,7 +13,7 @@
         console.log('start');
         e.preventDefault();
 
-        ns.token = $('#API-token').val();
+        ns.token = ns.$tokenInput.val();
         console.log('token', ns.token);
 
         ns.authorize(ns.token)

@@ -21,7 +21,16 @@
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
         $('.inputRepo').hide();
+        $('.details').show();
         ns.getRepo(ns.chosenRepo);
+    });
+
+    $('.inpRepo').on('click', function() {
+        console.log('repoName', ns.repoName);
+        if (!ns.repoName) {
+            $('.details').hide();
+            $('.inputRepo').show();
+        }
     });
 
     ns.loadView = function loadView(view) {
@@ -37,9 +46,9 @@
 
         $('.view').hide();
 
-        var viewBase = view.split('/')[0];//find the view module we care about
+        var viewBase = view.split('/')[0];
         var $view = $( viewBase );
-        //Remember: jquery object is array-like so you can get length
+
         $('.nav [href="' + ns.lastView + '"]')
             .parent()
                 .removeClass('active');
@@ -53,11 +62,11 @@
         }
 
         $view.show();
+
         ns.lastView = viewBase;
-        //excecute function to initialize chosen module
 
         if ( ns[viewBase.substr(1)] && ns[viewBase.substr(1)].load ) {
-            ns[viewBase.substr(1)].load( view );//substr will return everything after #
+            ns[viewBase.substr(1)].load( view );
         }
     };
 

@@ -11,14 +11,6 @@
     };
 
     ns.dispProfile = function dispProfile(data) {
-        //
-        // if (!data) {
-        //     $('#profile')
-        //         .append('<p class="no-data">Strange, no info in your GitHub account</p>');
-        //         .find('ul')
-        //             .hide();
-        //     return;
-        // }
         ns.username = data.login;
 
         $('.avatar')
@@ -33,8 +25,12 @@
         $('.followers')
             .text('Followers: ' + data.followers + ' (following ' + data.following + ')');
         $('.acct-created')
-            .text('Account created: ' + data.created_at);
+            .text('Account created: ' + ns.date(data.created_at) );
+    };
 
+    ns.date = function justDate(dateTime){
+        var dateArr = dateTime.split('T');
+        return dateArr[0];
     };
 
 })(window.tracker);

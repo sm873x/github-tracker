@@ -3,6 +3,17 @@
 
     window.tracker = ns = (ns || {});
 
+    ns.$repoForm = $('.inputRepo');
+    ns.$theRepoName = $('.repo-name');
+    ns.$repoIssUrl = $('.issues-url');
+
+    ns.$repoForm.on('submit', function(e) {
+        e.preventDefault();
+
+        var theRepo = $('#Repo-name').val();
+
+        ns.getRepo(theRepo);
+    });
 
     ns.getRepo = function getRepo(repoName) {
         $.ajax({
@@ -19,21 +30,35 @@
 
     ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
+        $('.details').show();
+        $('.inputRepo').hide();
 
-        $('.repo-name')
+        dispIssue(data);
+
+        ns.$theRepoName
             .attr('href', data.html_url)
             .text(data.name);
+
         $('.repo-text').text(data.description);
-        dispIssue(data);
+
+        $('.owner').text(ns.username);
+
+        $('.stars').text(data.stargazers_count);
+
+        $('.forks').text(data.forks_count);
+
+        $('.created-on').text( ns.date(data.created_at) );
     };
 
     function dispIssue(data) {
-        if (data.has_issues !== true) {
-            $('.issues-url')
-                .replaceWith('<p>This repo does not contain issues</p>');
+        console.log(data.has_issues);
+        if (data.has_issues) {
+            ns.$repoIssUrl.show();
+            ns.$repoIssUrl.attr('href', (data.html_url + '/issues') );
+            $('.open-issues').text(JSON.stringify(data.open_issues_count));
+        } else {
+            ns.$repoIssUrl.hide();
         }
-        
-        $('.issues-url').attr('href', (data.html_url + '/issues') );
-        $('.open-issues').text(JSON.stringify(data.open_issues_count));
     }
+
 })(window.tracker);

@@ -21,7 +21,16 @@
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
         $('.inputRepo').hide();
+        $('.details').show();
         ns.getRepo(ns.chosenRepo);
+    });
+
+    $('.inpRepo').on('click', function() {
+        console.log('repoName', ns.repoName);
+        if (!ns.repoName) {
+            $('.details').hide();
+            $('.inputRepo').show();
+        }
     });
 
     ns.loadView = function loadView(view) {
@@ -37,9 +46,9 @@
 
         $('.view').hide();
 
-        var viewBase = view.split('/')[0];//find the view module we care about
+        var viewBase = view.split('/')[0];
         var $view = $( viewBase );
-        //Remember: jquery object is array-like so you can get length
+
         $('.nav [href="' + ns.lastView + '"]')
             .parent()
                 .removeClass('active');
@@ -53,11 +62,11 @@
         }
 
         $view.show();
+
         ns.lastView = viewBase;
-        //excecute function to initialize chosen module
 
         if ( ns[viewBase.substr(1)] && ns[viewBase.substr(1)].load ) {
-            ns[viewBase.substr(1)].load( view );//substr will return everything after #
+            ns[viewBase.substr(1)].load( view );
         }
     };
 
@@ -92,7 +101,7 @@
         console.log('start');
         e.preventDefault();
 
-        ns.token = $('#API-token').val();
+        ns.token = ns.$tokenInput.val();
         console.log('token', ns.token);
 
         ns.authorize(ns.token)
@@ -151,14 +160,6 @@
     };
 
     ns.dispProfile = function dispProfile(data) {
-        //
-        // if (!data) {
-        //     $('#profile')
-        //         .append('<p class="no-data">Strange, no info in your GitHub account</p>');
-        //         .find('ul')
-        //             .hide();
-        //     return;
-        // }
         ns.username = data.login;
 
         $('.avatar')
@@ -173,8 +174,12 @@
         $('.followers')
             .text('Followers: ' + data.followers + ' (following ' + data.following + ')');
         $('.acct-created')
-            .text('Account created: ' + data.created_at);
+            .text('Account created: ' + ns.date(data.created_at) );
+    };
 
+    ns.date = function justDate(dateTime){
+        var dateArr = dateTime.split('T');
+        return dateArr[0];
     };
 
 })(window.tracker);
@@ -184,6 +189,17 @@
 
     window.tracker = ns = (ns || {});
 
+    ns.$repoForm = $('.inputRepo');
+    ns.$theRepoName = $('.repo-name');
+    ns.$repoIssUrl = $('.issues-url');
+
+    ns.$repoForm.on('submit', function(e) {
+        e.preventDefault();
+
+        var theRepo = $('#Repo-name').val();
+
+        ns.getRepo(theRepo);
+    });
 
     ns.getRepo = function getRepo(repoName) {
         $.ajax({
@@ -200,23 +216,37 @@
 
     ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
+        $('.details').show();
+        $('.inputRepo').hide();
 
-        $('.repo-name')
+        dispIssue(data);
+
+        ns.$theRepoName
             .attr('href', data.html_url)
             .text(data.name);
+
         $('.repo-text').text(data.description);
-        dispIssue(data);
+
+        $('.owner').text(ns.username);
+
+        $('.stars').text(data.stargazers_count);
+
+        $('.forks').text(data.forks_count);
+
+        $('.created-on').text( ns.date(data.created_at) );
     };
 
     function dispIssue(data) {
-        if (data.has_issues !== true) {
-            $('.issues-url')
-                .replaceWith('<p>This repo does not contain issues</p>');
+        console.log(data.has_issues);
+        if (data.has_issues) {
+            ns.$repoIssUrl.show();
+            ns.$repoIssUrl.attr('href', (data.html_url + '/issues') );
+            $('.open-issues').text(JSON.stringify(data.open_issues_count));
+        } else {
+            ns.$repoIssUrl.hide();
         }
-        
-        $('.issues-url').attr('href', (data.html_url + '/issues') );
-        $('.open-issues').text(JSON.stringify(data.open_issues_count));
     }
+
 })(window.tracker);
 
 (function(ns) {
