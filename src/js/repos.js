@@ -5,22 +5,22 @@
 
     $('a[href="#repos"]').on('click', function() {
         if (!ns.repoDataArr) {
-            ns.getRepoList()
+            ns.getRepoList(ns.token)
                 .done(function(data) {
                     ns.repoDataArr = data;
-
+                    console.log(ns.repoDataArr);
                     ns.repoDataArr.forEach( ns.dispRepoList );
                 })
                 .fail( ns.error );
         }
     });
 
-    ns.getRepoList = function getRepoList() {
+    ns.getRepoList = function getRepoList(token) {
         return $.ajax({
-            url: 'https:api.github.com/user/repos',
+            url: 'https://api.github.com/user/repos',
             get: 'get',
             headers: {
-                'Authorization': 'token ' + ns.token
+                'Authorization': 'token ' + token
             },
             dataType: 'json'
         });
@@ -28,8 +28,6 @@
 
     ns.dispRepoList = function dispRepoList(repo) {
         ns.repoName = repo.name;
-        console.log( 'repo name', ns.repoName );
-        // ns.repoURL = repo.svn_url;
 
         $('.repoTable')
             .append('<tr class=' + ns.repoName + '> \
