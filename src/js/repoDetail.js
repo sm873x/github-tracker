@@ -5,6 +5,7 @@
 
     ns.$theRepoName = $('.repo-name');
     ns.$repoIssUrl = $('.issues-url');
+    ns.$repoForm = $('.inputRepo');
 
     ns.$repoForm.on('submit', function(e) {
         e.preventDefault();

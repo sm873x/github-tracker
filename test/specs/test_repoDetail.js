@@ -44,13 +44,13 @@
 
         });
 
-        test('get repo data fails with no arguments');
-
-        test('get repo data fails with no username');
-
-        test('get repo data fails with no repo name');
-
-        test('get repo data fails with nonexistent repo');
+        // test('get repo data fails with no arguments');
+        //
+        // test('get repo data fails with no username');
+        //
+        // test('get repo data fails with no repo name');
+        //
+        // test('get repo data fails with nonexistent repo');
 
     });
 
