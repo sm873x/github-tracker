@@ -3,9 +3,12 @@
 
     window.tracker = ns = (ns || {});
 
+    ns.$nav = $('.nav');
     var authView = '#authorization';
     var logoutView = '#logout';
-    ns.$nav = $('.nav');
+    var reposView = '#repos';
+    var $details = $('.details');
+    var $inputRepo = $('.inputRepo');
 
     window.addEventListener('hashchange', function() {
         console.log('hash change');
@@ -17,19 +20,19 @@
         ns.loadView( window.location.hash || authView );
     });
 
-    $('#repos').on('click', '.toRepoDetail', function(e) {
+    reposView.on('click', '.toRepoDetail', function(e) {
         ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
-        $('.inputRepo').hide();
-        $('.details').show();
+        $inputRepo.hide();
+        $details.show();
         ns.getRepo(ns.chosenRepo);
     });
 
     $('.inpRepo').on('click', function() {
         console.log('repoName', ns.repoName);
         if (!ns.repoName) {
-            $('.details').hide();
-            $('.inputRepo').show();
+            $details.hide();
+            $inputRepo.show();
         }
     });
 
