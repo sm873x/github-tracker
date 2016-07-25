@@ -19,6 +19,7 @@
         ns.authorize(ns.token)
             .done(function(data) {
                 ns.userData = data;
+                ns.username = data.login;
                 console.log(ns.userData);
 
                 window.location.hash = '#profile';

@@ -11,21 +11,25 @@
         e.preventDefault();
 
         var theRepo = $('#Repo-name').val();
+        // console.log('testing this', ns.username);
 
-        ns.getRepo(theRepo);
+        ns.getRepo(ns.username, ns.token, theRepo)
+            .done(function(data) {
+                console.log(data);
+                ns.dispRepoDetail(data);
+            })
+            .fail( ns.error );
     });
 
-    ns.getRepo = function getRepo(repoName) {
-        $.ajax({
-            url: 'https://api.github.com/repos/' + ns.username + '/' + repoName,
+    ns.getRepo = function getRepo(username, token, repo) {
+        return $.ajax({
+            url: 'https://api.github.com/repos/' + username + '/' + repo,
             get: 'get',
             headers: {
-                'Authorization': 'token ' + ns.token
+                'Authorization': 'token ' + token
             },
             dataType: 'json'
-        })
-        .done( ns.dispRepoDetail )
-        .fail( ns.error );
+        });
     };
 
     ns.dispRepoDetail = function dispRepoDetail(data) {

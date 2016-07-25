@@ -5,10 +5,8 @@
 
     var fixtures = $('.fixtures').html();
 
-    suite('get repos in table', function() {
+    suite('get all repos', function() {
         setup(function() {
-            $('.fixtures').html(fixtures);
-
             $.mockjax({
                 url: 'https://api.github.com/user/repos',
                 method: 'get',

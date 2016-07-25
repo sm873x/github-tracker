@@ -21,11 +21,18 @@
     });
 
     $reposView.on('click', '.toRepoDetail', function(e) {
-        ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
+        
         ns.$repoForm.hide();
         ns.$details.show();
-        ns.getRepo(ns.chosenRepo);
+
+        ns.chosenRepo = e.target.innerText;
+        ns.getRepo(ns.username, ns.token, ns.chosenRepo)
+            .done(function(data) {
+                console.log(data);
+                ns.dispRepoDetail(data);
+            })
+            .fail( ns.error );
     });
 
     $('.inpRepo').on('click', function() {

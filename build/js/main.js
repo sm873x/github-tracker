@@ -21,11 +21,18 @@
     });
 
     $reposView.on('click', '.toRepoDetail', function(e) {
-        ns.chosenRepo = e.target.innerText;
         window.location.hash = '#repoDetail/' + ns.chosenRepo;
+        
         ns.$repoForm.hide();
         ns.$details.show();
-        ns.getRepo(ns.chosenRepo);
+
+        ns.chosenRepo = e.target.innerText;
+        ns.getRepo(ns.username, ns.token, ns.chosenRepo)
+            .done(function(data) {
+                console.log(data);
+                ns.dispRepoDetail(data);
+            })
+            .fail( ns.error );
     });
 
     $('.inpRepo').on('click', function() {
@@ -109,6 +116,7 @@
         ns.authorize(ns.token)
             .done(function(data) {
                 ns.userData = data;
+                ns.username = data.login;
                 console.log(ns.userData);
 
                 window.location.hash = '#profile';
@@ -175,8 +183,6 @@
     };
 
     ns.dispProfile = function dispProfile(data) {
-        ns.username = data.login;
-
         $('.avatar')
             .attr('src', data.avatar_url);
         $('.userPage')
@@ -207,21 +213,25 @@
         e.preventDefault();
 
         var theRepo = $('#Repo-name').val();
+        // console.log('testing this', ns.username);
 
-        ns.getRepo(theRepo);
+        ns.getRepo(ns.username, ns.token, theRepo)
+            .done(function(data) {
+                console.log(data);
+                ns.dispRepoDetail(data);
+            })
+            .fail( ns.error );
     });
 
-    ns.getRepo = function getRepo(repoName) {
-        $.ajax({
-            url: 'https://api.github.com/repos/' + ns.username + '/' + repoName,
+    ns.getRepo = function getRepo(username, token, repo) {
+        return $.ajax({
+            url: 'https://api.github.com/repos/' + username + '/' + repo,
             get: 'get',
             headers: {
-                'Authorization': 'token ' + ns.token
+                'Authorization': 'token ' + token
             },
             dataType: 'json'
-        })
-        .done( ns.dispRepoDetail )
-        .fail( ns.error );
+        });
     };
 
     ns.dispRepoDetail = function dispRepoDetail(data) {

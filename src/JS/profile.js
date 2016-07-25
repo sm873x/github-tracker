@@ -11,8 +11,6 @@
     };
 
     ns.dispProfile = function dispProfile(data) {
-        ns.username = data.login;
-
         $('.avatar')
             .attr('src', data.avatar_url);
         $('.userPage')
