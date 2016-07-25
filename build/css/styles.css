@@ -1,5 +1,5 @@
 main {
-  width: 425px;
+  width: 50%;
   margin: 30% auto; }
 
 .auth-area {
@@ -19,15 +19,27 @@ main {
   border: 2px solid #8f8d91; }
 
 #profile {
-  padding-top: 10px;
-  padding-right: 40px; }
+  padding: 2%; }
   #profile ul {
     list-style: none;
-    padding-bottom: 80px;
+    padding-left: 4%;
+    padding-bottom: 20%;
     font-weight: bold; }
+  #profile ul li {
+    padding-bottom: 2%; }
 
 .avatar {
   float: right;
   width: 67px; }
+
+#repos {
+  padding: 5%; }
+
+.toRepoDetail {
+  text-decoration: underline;
+  color: #0000cd; }
+
+#repoDetail {
+  padding: 5%; }
 
 /*# sourceMappingURL=styles.css.map */

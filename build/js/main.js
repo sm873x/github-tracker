@@ -343,7 +343,7 @@
     /**
      * Display repo list in html table
      * @param  {JQuery object} repo Repo object with specified properties and values within
-     * @return {void}   
+     * @return {void}
      */
     ns.dispRepoList = function dispRepoList(repo) {
         ns.repoName = repo.name;

@@ -21,9 +21,10 @@
                 <h1>GitHub Tracker</h1>
                 <p>Please log in with your GitHub API token:</p>
                 <form class='form-inline logToken' action='' method='post'>
-                    <!-- <label for='API-token'>Use Token</label> -->
-                    <input class='form-control' type='text' id='API-token' name='name' placeholder='GitHub API Token'>
-                    <input class='btn btn-default' type='submit' value='Login'>
+                    <div class='form-group'>
+                        <input class='form-control' type='text' id='API-token' name='name' placeholder='GitHub API Token'>
+                        <input class='btn btn-default' type='submit' value='Login'>
+                    </div>
                 </form>
             </section>
 
@@ -54,11 +55,11 @@
                         <th>Stars</th>
                         <th>Open Issues</th>
                     </tr>
-                <!-- TODO add table rows for each repo
+                <!-- add table rows for each repo
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <td class="toRepoDetail"></td>
+                        <td></td>
+                        <td></td>
                     <tr>
                 -->
                 </table>
@@ -67,13 +68,13 @@
             <section id='repoDetail' class='view'>
                 <article class='repo-description'>
                     <form class='form-inline inputRepo' action='' method='post'>
-                        <input class='form-control' type='text' id='Repo-name' name='name' placeholder='Enter a repo to get details'>
+                        <input class='form-control' type='text' id='Repo-name' name='name' placeholder='Enter a valid repo'>
                         <input class='btn btn-default' type='submit' value='get repo'>
                     </form>
-                    <a class='repo-name details'></a>
+                    <h3><strong><a class='repo-name details'></a></strong></h3>
                     <p class='repo-text details'></p>
                     <a class='issues-url details'><span class='open-issues'>#</span> open issues</a>
-                    <ul class='details'>
+                    <ul class='details list-unstyled'>
                         <li>Owner: <span class='owner'></span></li>
                         <li>Stars: <span class='stars'></span></li>
                         <li>Forks: <span class='forks'></span></li>
