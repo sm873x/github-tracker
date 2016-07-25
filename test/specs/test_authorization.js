@@ -1,18 +1,16 @@
 (function() {
+
     'use strict';
 
     var assert = window.chai.assert;
 
     suite('get user information with token', function() {
-
         setup(function() {
-
             $.mockjax({
                 url: 'https://api.github.com/user',
                 method: 'get',
                 responseText: {name: 'Stella Ma', login: 'sm873x'}
             });
-
         });
 
         teardown(function() {
@@ -78,7 +76,6 @@
                 done();
             });
         });
-
     });
 
 })();

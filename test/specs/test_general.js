@@ -5,7 +5,6 @@
     var assert = window.chai.assert;
 
     suite('handleAjaxFail', function() {
-
         teardown(function(){
             window.tracker.statCode = '200';
         });
@@ -27,7 +26,6 @@
     });
 
     suite('justDate function gives just month, day and year', function() {
-
         teardown(function(){
             window.tracker.dateArr = null;
         });
