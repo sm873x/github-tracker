@@ -17,11 +17,15 @@
             .done(function(data) {
                 console.log(data);
                 ns.dispRepoDetail(data);
+
+                ns.$details.show();
+                ns.$repoForm.hide();
             })
             .fail( ns.error );
     });
 
     ns.getRepo = function getRepo(username, token, repo) {
+
         if (!username || !token || !repo) {
             var def = $.Deferred();
             def.reject({status: 401});
@@ -40,9 +44,6 @@
 
     ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
-        ns.$details.show();
-        ns.$repoForm.hide();
-
         dispIssue(data);
 
         ns.$theRepoName
