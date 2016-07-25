@@ -1,0 +1,59 @@
+main {
+    width: $mainWidth;
+    margin: $mainMargins;
+}
+
+.auth-area {
+    text-align: center;
+    padding-bottom: $areaPadding;
+}
+
+.form-inline {
+    width: $mainFormWidth;
+    display: inline;
+}
+
+.nav {
+    display: none;
+
+    .logout {
+        float: right;
+    }
+}
+
+.view {
+    border: $cardBorder;
+}
+
+#profile {
+    padding: $areaPadding;
+
+    ul {
+        list-style: none;
+        padding-left: $profilePaddingLeft;
+        padding-bottom: $profilePaddingBottom;
+        font-weight: bold;
+    }
+
+    ul li {
+        padding-bottom: $areaPadding;
+    }
+}
+
+.avatar {
+    float: right;
+    width: $avatarWidth;
+}
+
+#repos {
+    padding: $repoPadding;
+}
+
+.toRepoDetail {
+    text-decoration: underline;
+    color: $repoNameTextColor;
+}
+
+#repoDetail {
+    padding: $repoPadding;
+}
