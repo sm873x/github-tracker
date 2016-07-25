@@ -38,7 +38,7 @@
             var dateTime = '2016-07-25T03:14:28';
             window.tracker.dateArr = ['2016-07-25', '03:14:28'];
             assert.isArray(dateTime.split('T'), 'splitting timestamp on T gives an array of two strings');
-            assert.strictEqual(window.tracker.dateArr[0], '2016-07-25', 'justDate function provides only year, month and day');
+            assert.strictEqual(window.tracker.dateArr[0], '2016-07-25', 'justDate function works');
         });
     });
 

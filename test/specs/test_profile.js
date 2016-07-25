@@ -20,8 +20,9 @@
         });
 
         test('displays profile data within list items', function() {
+            var username = 'foo';
             var data = {name: 'testname', created_at: '2016-07-24T20:43:27'};
-            window.tracker.dispProfile(data);
+            window.tracker.dispProfile(username, data);
             assert.strictEqual(data.name, 'testname', 'data values work');
         });
 

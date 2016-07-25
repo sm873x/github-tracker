@@ -29,7 +29,7 @@
 
     /**
      * Use GitHub token to authorize retrieval of user info
-     * @param  {String} token Person Access Token
+     * @param  {String} token Personal Access Token
      * @return {Promise} jQuery XHR Object containing promise method
      */
     ns.authorize = function loginAPI(token) {

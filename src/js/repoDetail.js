@@ -24,8 +24,14 @@
             .fail( ns.error );
     });
 
+    /**
+     * Ajax call for data on specific chosen repo
+     * @param  {String} username Login name of user
+     * @param  {String} token    Personal authorization token
+     * @param  {String} repo     Name of repo chosen
+     * @return {Promise} jQuery XHR Object containing promise method
+     */
     ns.getRepo = function getRepo(username, token, repo) {
-
         if (!username || !token || !repo) {
             var def = $.Deferred();
             def.reject({status: 401});
@@ -42,6 +48,11 @@
         });
     };
 
+    /**
+     * Display repo details within selected html section element
+     * @param  {JQuery XHR Object} data Ajax data with specified properties and values
+     * @return {void}
+     */
     ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
         dispIssue(data);
@@ -61,6 +72,11 @@
         $('.created-on').text( ns.date(data.created_at) );
     };
 
+    /**
+     * Hide .open-issues html class if repo has issues and vice versa
+     * @param  {JQuery XHR Object} data Ajax data with specified properties and values
+     * @return {void}   
+     */
     function dispIssue(data) {
         console.log(data.has_issues);
         if (data.has_issues) {

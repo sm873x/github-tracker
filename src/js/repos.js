@@ -15,6 +15,11 @@
         }
     });
 
+    /**
+     * Make ajax call to get list of repos
+     * @param  {String} token Personal authorized token
+     * @return {Promise} jQuery XHR Object containing promise method
+     */
     ns.getRepoList = function getRepoList(token) {
         return $.ajax({
             url: 'https://api.github.com/user/repos',
@@ -26,6 +31,11 @@
         });
     };
 
+    /**
+     * Display repo list in html table
+     * @param  {JQuery object} repo Repo object with specified properties and values within
+     * @return {void}   
+     */
     ns.dispRepoList = function dispRepoList(repo) {
         ns.repoName = repo.name;
 

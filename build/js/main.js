@@ -126,7 +126,7 @@
 
     /**
      * Use GitHub token to authorize retrieval of user info
-     * @param  {String} token Person Access Token
+     * @param  {String} token Personal Access Token
      * @return {Promise} jQuery XHR Object containing promise method
      */
     ns.authorize = function loginAPI(token) {
@@ -153,6 +153,11 @@
 
     window.tracker = ns = ( ns || {} );
 
+    /**
+     * Handles ajax failures
+     * @param  {JQuery XHR Object} xhr XHR data with status code
+     * @return {void}
+     */
     ns.error = function handleAjaxFail(xhr) {
         ns.statCode = xhr.status;
         if ( 400 <= ns.statCode && ns.statCode < 500 ) {
@@ -162,6 +167,11 @@
         }
     };
 
+    /**
+     * Splits year-month-day from full timestamp
+     * @param  {String} dateTime Timestamp
+     * @return {String} Date with just year-month-day
+     */
     ns.date = function justDate(dateTime){
         ns.dateArr = dateTime.split('T');
         return ns.dateArr[0];
@@ -178,14 +188,20 @@
     ns.profile.load = function initProfile() {
         console.log('hash', window.location.hash);
         ns.dispNav();
-        ns.dispProfile(ns.userData);
+        ns.dispProfile(ns.username, ns.userData);
     };
 
-    ns.dispProfile = function dispProfile(data) {
+    /**
+     * Displays profile information for authorized user
+     * @param  {String} username Name of authorized user
+     * @param  {JQuery Object} data Object with specified properties and values
+     * @return {void}          
+     */
+    ns.dispProfile = function dispProfile(username, data) {
         $('.avatar')
             .attr('src', data.avatar_url);
         $('.userPage')
-            .text(ns.username)
+            .text(username)
             .attr('href', data.html_url);
         $('.name')
             .text('Name: ' + data.name);
@@ -225,8 +241,14 @@
             .fail( ns.error );
     });
 
+    /**
+     * Ajax call for data on specific chosen repo
+     * @param  {String} username Login name of user
+     * @param  {String} token    Personal authorization token
+     * @param  {String} repo     Name of repo chosen
+     * @return {Promise} jQuery XHR Object containing promise method
+     */
     ns.getRepo = function getRepo(username, token, repo) {
-
         if (!username || !token || !repo) {
             var def = $.Deferred();
             def.reject({status: 401});
@@ -243,6 +265,11 @@
         });
     };
 
+    /**
+     * Display repo details within selected html section element
+     * @param  {JQuery XHR Object} data Ajax data with specified properties and values
+     * @return {void}
+     */
     ns.dispRepoDetail = function dispRepoDetail(data) {
         console.log(data);
         dispIssue(data);
@@ -262,6 +289,11 @@
         $('.created-on').text( ns.date(data.created_at) );
     };
 
+    /**
+     * Hide .open-issues html class if repo has issues and vice versa
+     * @param  {JQuery XHR Object} data Ajax data with specified properties and values
+     * @return {void}   
+     */
     function dispIssue(data) {
         console.log(data.has_issues);
         if (data.has_issues) {
@@ -292,6 +324,11 @@
         }
     });
 
+    /**
+     * Make ajax call to get list of repos
+     * @param  {String} token Personal authorized token
+     * @return {Promise} jQuery XHR Object containing promise method
+     */
     ns.getRepoList = function getRepoList(token) {
         return $.ajax({
             url: 'https://api.github.com/user/repos',
@@ -303,6 +340,11 @@
         });
     };
 
+    /**
+     * Display repo list in html table
+     * @param  {JQuery object} repo Repo object with specified properties and values within
+     * @return {void}   
+     */
     ns.dispRepoList = function dispRepoList(repo) {
         ns.repoName = repo.name;
 
