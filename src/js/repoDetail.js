@@ -22,6 +22,12 @@
     });
 
     ns.getRepo = function getRepo(username, token, repo) {
+        if (!username || !token || !repo) {
+            var def = $.Deferred();
+            def.reject({status: 401});
+            return def.promise();
+        }
+
         return $.ajax({
             url: 'https://api.github.com/repos/' + username + '/' + repo,
             get: 'get',
