@@ -6,7 +6,7 @@
     ns.$nav = $('.nav');
     var authView = '#authorization';
     var logoutView = '#logout';
-    var $reposView = $('#repos');
+    // var $reposView = $('#repos');
     ns.$details = $('.details');
     ns.$repoForm = $('.inputRepo');
 
@@ -20,20 +20,20 @@
         ns.loadView( window.location.hash || authView );
     });
 
-    $reposView.on('click', '.toRepoDetail', function(e) {
-        window.location.hash = '#repoDetail/' + ns.chosenRepo;
-        
-        ns.$repoForm.hide();
-        ns.$details.show();
-
-        ns.chosenRepo = e.target.innerText;
-        ns.getRepo(ns.username, ns.token, ns.chosenRepo)
-            .done(function(data) {
-                console.log(data);
-                ns.dispRepoDetail(data);
-            })
-            .fail( ns.error );
-    });
+    // $reposView.on('click', '.toRepoDetail', function(e) {
+    //     window.location.hash = '#repoDetail/' + ns.chosenRepo;
+    //
+    //     ns.$repoForm.hide();
+    //     ns.$details.show();
+    //
+    //     ns.chosenRepo = e.target.innerText;
+    //     ns.getRepo(ns.username, ns.token, ns.chosenRepo)
+    //         .done(function(data) {
+    //             console.log(data);
+    //             ns.dispRepoDetail(data);
+    //         })
+    //         .fail( ns.error );
+    // });
 
     $('.inpRepo').on('click', function() {
         console.log('repoName', ns.repoName);

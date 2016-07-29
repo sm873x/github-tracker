@@ -7,6 +7,17 @@
     ns.$repoIssUrl = $('.issues-url');
     ns.$repoForm = $('.inputRepo');
 
+    ns.repoDetail = {};
+    ns.repoDetail.load = function(hash) {
+        var chosenRepo = hash.split('/')[1];
+        ns.getRepo(ns.username, ns.token, chosenRepo)
+           .done(function(data) {
+               console.log(data);
+               ns.dispRepoDetail(data);
+           })
+           .fail( ns.error );
+    };
+
     ns.$repoForm.on('submit', function(e) {
         e.preventDefault();
 
@@ -75,7 +86,7 @@
     /**
      * Hide .open-issues html class if repo has issues and vice versa
      * @param  {JQuery XHR Object} data Ajax data with specified properties and values
-     * @return {void}   
+     * @return {void}
      */
     function dispIssue(data) {
         console.log(data.has_issues);

@@ -6,7 +6,7 @@
     ns.$nav = $('.nav');
     var authView = '#authorization';
     var logoutView = '#logout';
-    var $reposView = $('#repos');
+    // var $reposView = $('#repos');
     ns.$details = $('.details');
     ns.$repoForm = $('.inputRepo');
 
@@ -20,20 +20,20 @@
         ns.loadView( window.location.hash || authView );
     });
 
-    $reposView.on('click', '.toRepoDetail', function(e) {
-        window.location.hash = '#repoDetail/' + ns.chosenRepo;
-        
-        ns.$repoForm.hide();
-        ns.$details.show();
-
-        ns.chosenRepo = e.target.innerText;
-        ns.getRepo(ns.username, ns.token, ns.chosenRepo)
-            .done(function(data) {
-                console.log(data);
-                ns.dispRepoDetail(data);
-            })
-            .fail( ns.error );
-    });
+    // $reposView.on('click', '.toRepoDetail', function(e) {
+    //     window.location.hash = '#repoDetail/' + ns.chosenRepo;
+    //
+    //     ns.$repoForm.hide();
+    //     ns.$details.show();
+    //
+    //     ns.chosenRepo = e.target.innerText;
+    //     ns.getRepo(ns.username, ns.token, ns.chosenRepo)
+    //         .done(function(data) {
+    //             console.log(data);
+    //             ns.dispRepoDetail(data);
+    //         })
+    //         .fail( ns.error );
+    // });
 
     $('.inpRepo').on('click', function() {
         console.log('repoName', ns.repoName);
@@ -224,6 +224,17 @@
     ns.$repoIssUrl = $('.issues-url');
     ns.$repoForm = $('.inputRepo');
 
+    ns.repoDetail = {};
+    ns.repoDetail.load = function(hash) {
+        var chosenRepo = hash.split('/')[1];
+        ns.getRepo(ns.username, ns.token, chosenRepo)
+           .done(function(data) {
+               console.log(data);
+               ns.dispRepoDetail(data);
+           })
+           .fail( ns.error );
+    };
+
     ns.$repoForm.on('submit', function(e) {
         e.preventDefault();
 
@@ -292,7 +303,7 @@
     /**
      * Hide .open-issues html class if repo has issues and vice versa
      * @param  {JQuery XHR Object} data Ajax data with specified properties and values
-     * @return {void}   
+     * @return {void}
      */
     function dispIssue(data) {
         console.log(data.has_issues);
@@ -312,7 +323,9 @@
 
     window.tracker = ns = (ns || {});
 
-    $('a[href="#repos"]').on('click', function() {
+    // $('a[href="#repos"]').on('click', function() {
+    ns.repos = {};
+    ns.repos.load = function() {
         if (!ns.repoDataArr) {
             ns.getRepoList(ns.token)
                 .done(function(data) {
@@ -322,7 +335,8 @@
                 })
                 .fail( ns.error );
         }
-    });
+    };
+    // });
 
     /**
      * Make ajax call to get list of repos
@@ -346,11 +360,10 @@
      * @return {void}
      */
     ns.dispRepoList = function dispRepoList(repo) {
-        ns.repoName = repo.name;
 
         $('.repoTable')
-            .append('<tr class=' + ns.repoName + '> \
-                        <td class="toRepoDetail">' + ns.repoName + '</td> \
+            .append('<tr> \
+                        <td><a href="#repoDetail/' + repo.name + '">' + repo.name + '</a></td> \
                         <td>' + repo.stargazers_count + '</td> \
                         <td>' + repo.open_issues_count + '</td> \
                     </tr>');

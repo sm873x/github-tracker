@@ -3,7 +3,9 @@
 
     window.tracker = ns = (ns || {});
 
-    $('a[href="#repos"]').on('click', function() {
+    // $('a[href="#repos"]').on('click', function() {
+    ns.repos = {};
+    ns.repos.load = function() {
         if (!ns.repoDataArr) {
             ns.getRepoList(ns.token)
                 .done(function(data) {
@@ -13,7 +15,8 @@
                 })
                 .fail( ns.error );
         }
-    });
+    };
+    // });
 
     /**
      * Make ajax call to get list of repos
@@ -37,11 +40,10 @@
      * @return {void}
      */
     ns.dispRepoList = function dispRepoList(repo) {
-        ns.repoName = repo.name;
 
         $('.repoTable')
-            .append('<tr class=' + ns.repoName + '> \
-                        <td class="toRepoDetail">' + ns.repoName + '</td> \
+            .append('<tr> \
+                        <td><a href="#repoDetail/' + repo.name + '">' + repo.name + '</a></td> \
                         <td>' + repo.stargazers_count + '</td> \
                         <td>' + repo.open_issues_count + '</td> \
                     </tr>');
